@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://hbb41acs85wt"]
+
+[ext_resource type="Script" uid="uid://be4smqlx6se7m" path="res://main.torch" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://dmv610lbhobc2" path="res://icon.svg" id="2_0xm2m"]
+
+[node name="Main" type="Node2D" unique_id=1163363995]
+script = ExtResource("1_ig7tw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=721402520]
+position = Vector2(68, 233)
+texture = ExtResource("2_0xm2m")
+
+[node name="Label" type="Label" parent="." unique_id=1082497057]
+offset_right = 40.0
+offset_bottom = 23.0

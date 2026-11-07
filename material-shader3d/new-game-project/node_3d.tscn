@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://mgp02mkor0at"]
+
+[ext_resource type="Shader" uid="uid://dyww15pl66x8s" path="res://new_shader.tres" id="1_a202f"]
+[ext_resource type="PackedScene" uid="uid://clk2p06jvaamf" path="res://3dMatTest.tscn" id="2_noarx"]
+[ext_resource type="Material" uid="uid://dntpbwow4uoen" path="res://gridMaterialTriplanar.tres" id="4_jka67"]
+[ext_resource type="PackedScene" uid="uid://dh01yg4143vhf" path="res://textures/crabby blank.glb" id="4_r3fl7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_noarx"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_a0tk4"]
+sky_material = SubResource("ProceduralSkyMaterial_noarx")
+
+[sub_resource type="Environment" id="Environment_r3fl7"]
+background_mode = 1
+sky = SubResource("Sky_a0tk4")
+ambient_light_source = 2
+ambient_light_color = Color(0.46618086, 0.4661808, 0.4661808, 1)
+ambient_light_energy = 0.1
+glow_enabled = true
+glow_intensity = 1.35
+glow_bloom = 0.22
+glow_hdr_threshold = 0.71
+fog_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_depth_curve = 0.5176324
+
+[sub_resource type="BoxMesh" id="BoxMesh_dnd5y"]
+size = Vector3(15.325317, 0.6651001, 16.758179)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jka67"]
+render_priority = 0
+shader = ExtResource("1_a202f")
+shader_parameter/speed = Vector2(0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u0lwl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5kra"]
+emission_enabled = true
+emission = Color(0.34165457, 0.5155575, 1, 1)
+emission_energy_multiplier = 1.8
+
+[sub_resource type="TextMesh" id="TextMesh_gwwqv"]
+text = "TPQZ-Dev
+"
+font_size = 72
+
+[sub_resource type="SphereMesh" id="SphereMesh_q5kra"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0tk4"]
+render_priority = 0
+shader = ExtResource("1_a202f")
+shader_parameter/speed = Vector2(0, 0)
+
+[node name="Node3D" type="Node3D" unique_id=312653736]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2002204498]
+environment = SubResource("Environment_r3fl7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=485405890]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3150024, -0.09101033, 3.0187378)
+material_override = ExtResource("4_jka67")
+mesh = SubResource("BoxMesh_dnd5y")
+surface_material_override/0 = SubResource("ShaderMaterial_jka67")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1357105618]
+transform = Transform3D(-0.51285565, -0.8537734, 0.08972271, -0.062153216, 0.141167, 0.9880328, -0.856222, 0.50114167, -0.12546304, 0.13676107, 3.6324127, -0.048625708)
+shadow_enabled = true
+omni_range = 12.705307
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1015660872]
+transform = Transform3D(0.8545189, 0, 0.5194203, 0, 1, 0, -0.5194203, 0, 0.8545189, -2.4390988, 3.611741, 8.898425)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1001028959]
+transform = Transform3D(-0.90764713, 0, 0.4197341, 0, 1, 0, -0.4197341, 0, -0.90764713, 4.991105, 3.1221967, -3.6879992)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1099509388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9456053, 2.056865, 3.1952162)
+mesh = SubResource("BoxMesh_u0lwl")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5kra")
+
+[node name="3Dtest" parent="." unique_id=1358958480 instance=ExtResource("2_noarx")]
+transform = Transform3D(0.9958656, 0, 0.09083867, 0, 1, 0, -0.09083867, 0, 0.9958656, -0.59196746, 1.4491315, -1.0604613)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=593114383]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=372209413]
+transform = Transform3D(1, 0, 0, 0, 0.9999668, 0.008150093, 0, -0.008150093, 0.9999668, -2.2439842, 0.5930258, 0.7033698)
+size = Vector3(6.868683, 1.1790771, 5.7644043)
+material = ExtResource("4_jka67")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1856794390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9486649, 1.3433332, 0.7162602)
+material_override = ExtResource("4_jka67")
+operation = 2
+size = Vector3(5.6173096, 1, 4.4654236)
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D" unique_id=408389623]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1227884, 0.22522831, 1)
+material_override = ExtResource("4_jka67")
+polygon = PackedVector2Array(0, 0, 0, 1, 3, 0, 3, 0)
+material = ExtResource("4_jka67")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1217529739]
+transform = Transform3D(-0.005611911, 0, 0.99998426, 0, 1, 0, -0.99998426, 0, -0.005611911, -4.200074, 4.2888236, -0.016722202)
+mesh = SubResource("TextMesh_gwwqv")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1039970141]
+transform = Transform3D(-0.16836873, 0, 0.9857241, 0, 1, 0, -0.9857241, 0, -0.16836873, 0.6347321, 2.681556, 1.6957057)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1402813834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.851154, 2.024261, -0.88599604)
+mesh = SubResource("SphereMesh_q5kra")
+surface_material_override/0 = SubResource("ShaderMaterial_a0tk4")
+
+[node name="crabby blank" parent="." unique_id=920991271 instance=ExtResource("4_r3fl7")]
+transform = Transform3D(0.10169166, 0, 0.99481595, 0, 1, 0, -0.99481595, 0, 0.10169166, -2.9259882, 1.5608566, 1.1897117)

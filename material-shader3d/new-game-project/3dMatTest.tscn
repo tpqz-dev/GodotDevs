@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://clk2p06jvaamf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_u0lwl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_168yu"]
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_gwwqv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjarm"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_dnd5y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5kra"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="3Dtest" type="Node3D" unique_id=1358958480]
+
+[node name="refllect" type="MeshInstance3D" parent="." unique_id=95321317]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5452116, 0)
+mesh = SubResource("SphereMesh_u0lwl")
+surface_material_override/0 = SubResource("StandardMaterial3D_168yu")
+
+[node name="white" type="MeshInstance3D" parent="." unique_id=352561329]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3245983, 0)
+mesh = SubResource("SphereMesh_gwwqv")
+surface_material_override/0 = SubResource("StandardMaterial3D_hjarm")
+
+[node name="black" type="MeshInstance3D" parent="." unique_id=423048732]
+mesh = SubResource("SphereMesh_dnd5y")
+surface_material_override/0 = SubResource("StandardMaterial3D_q5kra")

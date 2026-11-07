@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cds8xebsk6bnh"]
+
+[ext_resource type="Shader" uid="uid://llbgp5qutyh6" path="res://arts/shaders/postpro.gdshader" id="1_xl0no"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xl0no")
+shader_parameter/scroll_speed = Vector2(3, 5)
+shader_parameter/static_intensity = 0.25
+shader_parameter/color = Color(0, 0, 0, 0)
+shader_parameter/tex_scale = 3.0
+shader_parameter/tiling_offset = 0.5

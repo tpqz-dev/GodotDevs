@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c2lfo3het426u"]
+
+[ext_resource type="Shader" uid="uid://dt4yd8txs85mh" path="res://arts/shaders/gridShader.gdshader" id="1_xb5ts"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xb5ts")
+shader_parameter/color_a = Color(0.8379586, 0.8792611, 0.879292, 1)
+shader_parameter/color_b = Color(0.78, 0.8, 0.86, 1)
+shader_parameter/cells = 4.0
+shader_parameter/world_coordinates = false

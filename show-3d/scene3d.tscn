@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://v32c68xwh3j8"]
+
+[ext_resource type="Script" uid="uid://dotev35r5lb58" path="res://ObjLoader.cs" id="1_iysy3"]
+[ext_resource type="Shader" uid="uid://c4bbff7d8m0bo" path="res://shaders/matcap_shader.gdshader" id="2_71njl"]
+[ext_resource type="Script" uid="uid://cwut31bme838u" path="res://OrbitCamera.cs" id="2_i408x"]
+[ext_resource type="Script" uid="uid://bvit42to3t3uf" path="res://UiManager.cs" id="3_i408x"]
+[ext_resource type="Texture2D" uid="uid://dqeun1x76w486" path="res://textures/ceramic_hot.png" id="3_yuags"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i408x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yuags"]
+render_priority = 0
+shader = ExtResource("2_71njl")
+shader_parameter/matcap_texture = ExtResource("3_yuags")
+
+[sub_resource type="PlaceholderMesh" id="PlaceholderMesh_gwwqv"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_gwwqv"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dnd5y"]
+
+[node name="Scene3d" type="Node3D" unique_id=74304789 node_paths=PackedStringArray("_meshInstance", "_orbitCamera")]
+script = ExtResource("1_iysy3")
+_meshInstance = NodePath("MeshInstance3D")
+_orbitCamera = NodePath("Node3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1266718430]
+material_override = SubResource("ShaderMaterial_i408x")
+material_overlay = SubResource("ShaderMaterial_yuags")
+mesh = SubResource("PlaceholderMesh_gwwqv")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1141913771]
+script = ExtResource("2_i408x")
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=112197575]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2542856)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Camera3D" unique_id=183799908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0041192323, 0.004917711, -0.3705448)
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_gwwqv")
+surface_material_override/0 = SubResource("ShaderMaterial_dnd5y")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=936395367 node_paths=PackedStringArray("_fileDialog", "_objLoader", "_orbitCamera", "_fovSlider", "_matcapNameLabel")]
+script = ExtResource("3_i408x")
+_fileDialog = NodePath("CustomFileDialog")
+_objLoader = NodePath("..")
+_orbitCamera = NodePath("../Node3D")
+_fovSlider = NodePath("HFlowContainer/FovSlider")
+_matcapNameLabel = NodePath("FlowContainer/MatcapNameLabel")
+
+[node name="CustomFileDialog" type="FileDialog" parent="CanvasLayer" unique_id=417057705]
+title = "Open a File"
+mode_overrides_title = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.obj", "Wavefront.obj")
+show_hidden_files = true
+
+[node name="FlowContainer" type="FlowContainer" parent="CanvasLayer" unique_id=1674213769]
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 365.0
+offset_bottom = 64.0
+
+[node name="OpenButton" type="Button" parent="CanvasLayer/FlowContainer" unique_id=301651038]
+layout_mode = 2
+text = "LoadFiles"
+
+[node name="ResetViewButton" type="Button" parent="CanvasLayer/FlowContainer" unique_id=163331004]
+layout_mode = 2
+text = "Reset View"
+
+[node name="InvertNormalsButton" type="Button" parent="CanvasLayer/FlowContainer" unique_id=153778201]
+layout_mode = 2
+text = "Invert Normals"
+
+[node name="SavePngButton" type="Button" parent="CanvasLayer/FlowContainer" unique_id=603119222]
+layout_mode = 2
+text = "Save PNG"
+
+[node name="PrevMatcapButton" type="Button" parent="CanvasLayer/FlowContainer" unique_id=582893104]
+layout_mode = 2
+text = "Matcap <"
+
+[node name="NextMatcapButton" type="Button" parent="CanvasLayer/FlowContainer" unique_id=381916248]
+layout_mode = 2
+text = "Matcap >"
+
+[node name="MatcapNameLabel" type="Label" parent="CanvasLayer/FlowContainer" unique_id=237599404]
+layout_mode = 2
+text = "Matcap: -"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="CanvasLayer" unique_id=994354767]
+anchors_preset = -1
+anchor_top = 0.012
+anchor_bottom = 0.012
+offset_left = 314.0
+offset_top = 623.32
+offset_right = 494.0
+offset_bottom = 666.32
+rotation = -1.5707964
+
+[node name="FovLabel" type="Label" parent="CanvasLayer/HFlowContainer" unique_id=345812907]
+layout_mode = 2
+text = "FOV"
+
+[node name="FovSlider" type="HSlider" parent="CanvasLayer/HFlowContainer" unique_id=408031931]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+min_value = 35.0
+value = 75.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=827862165]
+transform = Transform3D(1, 0, 0, 0, 0.3469007, 0.93790185, 0, -0.93790185, 0.3469007, 0, 34.67868, 0.38472033)
+
+[node name="DirectionalLight3D4" type="DirectionalLight3D" parent="." unique_id=1057531410]
+transform = Transform3D(1, 0, 0, 0, 0.12448606, -0.99222136, 0, 0.99222136, 0.12448606, 0, -42.66919, 0.38472033)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1927599921]
+transform = Transform3D(1, 0, 0, 0, 0.99564606, 0.09321467, 0, -0.09321467, 0.99564606, 0, 0.06803942, 52.50147)
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="." unique_id=2082410558]
+transform = Transform3D(1, 0, 0, 0, -0.9999931, -0.0037209168, 0, 0.0037209168, -0.9999931, 0, 0.06803942, -41.248375)
+
+[connection signal="file_selected" from="CanvasLayer/CustomFileDialog" to="CanvasLayer" method="OnFileDialogFileSelected"]
+[connection signal="pressed" from="CanvasLayer/FlowContainer/OpenButton" to="CanvasLayer" method="OnOpenButtonPressed"]
+[connection signal="pressed" from="CanvasLayer/FlowContainer/ResetViewButton" to="CanvasLayer" method="OnResetViewPressed"]
+[connection signal="pressed" from="CanvasLayer/FlowContainer/InvertNormalsButton" to="CanvasLayer" method="OnInvertNormalsPressed"]
+[connection signal="pressed" from="CanvasLayer/FlowContainer/SavePngButton" to="CanvasLayer" method="OnSavePngPressed"]
+[connection signal="pressed" from="CanvasLayer/FlowContainer/PrevMatcapButton" to="CanvasLayer" method="OnPreviousMatcapPressed"]
+[connection signal="pressed" from="CanvasLayer/FlowContainer/NextMatcapButton" to="CanvasLayer" method="OnNextMatcapPressed"]
+[connection signal="value_changed" from="CanvasLayer/HFlowContainer/FovSlider" to="CanvasLayer" method="OnFovSliderValueChanged"]

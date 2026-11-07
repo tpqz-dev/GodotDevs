@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bxkef1t5nmqnd"
+path="res://.godot/imported/face2_demone.obj-42fd777ce905b1d8c8f2cb09a1f3452c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/face2_demone.obj-42fd777ce905b1d8c8f2cb09a1f3452c.mesh"]
+
+source_file="res://obj/face2_demone.obj"
+dest_files=["res://.godot/imported/face2_demone.obj-42fd777ce905b1d8c8f2cb09a1f3452c.mesh", "res://.godot/imported/face2_demone.obj-42fd777ce905b1d8c8f2cb09a1f3452c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

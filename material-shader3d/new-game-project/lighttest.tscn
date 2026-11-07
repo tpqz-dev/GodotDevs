@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://dawoga7y3u14y"]
+
+[node name="Lighttest" type="Node3D" unique_id=1409068175]
+transform = Transform3D(1, 0, 0, 0, 0.99993646, 0.011275279, 0, -0.011275279, 0.99993646, 0, 0, 0)
