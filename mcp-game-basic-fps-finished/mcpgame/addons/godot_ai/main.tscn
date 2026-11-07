@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://player.gd" id="1_player"]
+
+[sub_resource type="BoxShape3D" id="floor_shape"]
+size = Vector3(60, 1, 60)
+
+[sub_resource type="BoxMesh" id="floor_mesh"]
+size = Vector3(60, 1, 60)
+
+[sub_resource type="CapsuleShape3D" id="player_shape"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="BoxShape3D" id="box_shape"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="box_mesh"]
+size = Vector3(2, 2, 2)
+
+[node name="Main" type="Node3D"]
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("floor_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("floor_mesh")
+
+[node name="Box1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -6)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box1"]
+shape = SubResource("box_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box1"]
+mesh = SubResource("box_mesh")
+
+[node name="Box2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2"]
+shape = SubResource("box_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Box2"]
+mesh = SubResource("box_mesh")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("player_shape")
+
+[node name="Head" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+current = true

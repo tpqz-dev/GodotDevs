@@ -1,0 +1,155 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://player.gd" id="1_player"]
+[ext_resource type="PackedScene" path="res://tree.tscn" id="2_tree"]
+[ext_resource type="Script" path="res://main.gd" id="3_main"]
+
+[sub_resource type="Shader" id="CheckerShader"]
+code = "shader_type spatial;\n\nvoid fragment() {\n\tvec2 cell = floor(UV * 64.0);\n\tfloat checker = mod(cell.x + cell.y, 2.0);\n\tALBEDO = mix(vec3(0.18, 0.21, 0.18), vec3(0.65, 0.68, 0.61), checker);\n\tROUGHNESS = 1.0;\n}\n"
+
+[sub_resource type="ShaderMaterial" id="CheckerMaterial"]
+shader = SubResource("CheckerShader")
+
+[sub_resource type="PlaneMesh" id="GroundMesh"]
+material = SubResource("CheckerMaterial")
+size = Vector2(64, 64)
+
+[sub_resource type="BoxShape3D" id="GroundShape"]
+size = Vector3(64, 1, 64)
+
+[sub_resource type="CapsuleShape3D" id="PlayerShape"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="Environment" id="WorldEnvironment"]
+background_mode = 1
+background_color = Color(0.48, 0.7, 0.91, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.82, 0.9, 1, 1)
+ambient_light_energy = 0.7
+
+[node name="Main" type="Node3D"]
+script = ExtResource("3_main")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("WorldEnvironment")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-50, -30, 0)
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("GroundMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+position = Vector3(0, -0.5, 0)
+shape = SubResource("GroundShape")
+
+[node name="Player" type="CharacterBody3D" parent="." groups=["player"]]
+position = Vector3(0, 0.05, 0)
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+position = Vector3(0, 0.9, 0)
+shape = SubResource("PlayerShape")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+position = Vector3(0, 1.65, 0)
+current = true
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="Player"]
+max_polyphony = 32
+
+[node name="Trees" type="Node3D" parent="."]
+
+[node name="Tree01" parent="Trees" instance=ExtResource("2_tree")]
+position = Vector3(0, 0, -5)
+
+[node name="Tree02" parent="Trees" instance=ExtResource("2_tree")]
+position = Vector3(5, 0, -8)
+
+[node name="Tree03" parent="Trees" instance=ExtResource("2_tree")]
+position = Vector3(-5, 0, -8)
+
+[node name="Tree04" parent="Trees" instance=ExtResource("2_tree")]
+position = Vector3(10, 0, -3)
+
+[node name="Tree05" parent="Trees" instance=ExtResource("2_tree")]
+position = Vector3(-10, 0, -3)
+
+[node name="Tree06" parent="Trees" instance=ExtResource("2_tree")]
+position = Vector3(4, 0, 5)
+
+[node name="Tree07" parent="Trees" instance=ExtResource("2_tree")]
+position = Vector3(-4, 0, 5)
+
+[node name="Tree08" parent="Trees" instance=ExtResource("2_tree")]
+position = Vector3(9, 0, 9)
+
+[node name="Tree09" parent="Trees" instance=ExtResource("2_tree")]
+position = Vector3(-9, 0, 9)
+
+[node name="Tree10" parent="Trees" instance=ExtResource("2_tree")]
+position = Vector3(0, 0, -14)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Instructions" type="Label" parent="HUD"]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 600.0
+offset_bottom = 62.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "ZQSD / WASD ou flèches : se déplacer   |   Souris : regarder\nClic gauche : tirer / reprendre la souris   |   Espace : sauter   |   Échap : libérer"
+
+[node name="Score" type="Label" parent="HUD"]
+offset_left = 16.0
+offset_top = 72.0
+offset_right = 350.0
+offset_bottom = 104.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 24
+text = "Arbres touchés : 0 / 10"
+
+[node name="Victory" type="Label" parent="HUD"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -130.0
+offset_right = 250.0
+offset_bottom = -30.0
+theme_override_colors/font_color = Color(1, 0.9, 0.2, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 72
+text = "Gagné !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crosshair" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -13.0
+offset_right = 5.0
+offset_bottom = 13.0
+theme_override_font_sizes/font_size = 24
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1

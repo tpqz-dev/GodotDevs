@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://tree.gd" id="1_tree"]
+
+[sub_resource type="StandardMaterial3D" id="TrunkMaterial"]
+albedo_color = Color(0.35, 0.18, 0.07, 1)
+roughness = 1.0
+
+[sub_resource type="CylinderMesh" id="TrunkMesh"]
+material = SubResource("TrunkMaterial")
+top_radius = 0.3
+bottom_radius = 0.38
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="LeavesMaterial"]
+albedo_color = Color(0.13, 0.44, 0.15, 1)
+roughness = 1.0
+
+[sub_resource type="CylinderMesh" id="LeavesMesh"]
+material = SubResource("LeavesMaterial")
+top_radius = 0.0
+bottom_radius = 1.3
+height = 3.0
+
+[sub_resource type="CylinderShape3D" id="TreeShape"]
+height = 2.0
+radius = 0.42
+
+[sub_resource type="ConvexPolygonShape3D" id="LeavesShape"]
+points = PackedVector3Array(0, 1.5, 0, 1.3, -1.5, 0, 0.919, -1.5, 0.919, 0, -1.5, 1.3, -0.919, -1.5, 0.919, -1.3, -1.5, 0, -0.919, -1.5, -0.919, 0, -1.5, -1.3, 0.919, -1.5, -0.919)
+
+[node name="Tree" type="Area3D" groups=["trees"]]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_tree")
+
+[node name="Trunk" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1, 0)
+mesh = SubResource("TrunkMesh")
+
+[node name="Leaves" type="MeshInstance3D" parent="."]
+position = Vector3(0, 3.1, 0)
+mesh = SubResource("LeavesMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 1, 0)
+shape = SubResource("TreeShape")
+
+[node name="LeavesCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 3.1, 0)
+shape = SubResource("LeavesShape")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

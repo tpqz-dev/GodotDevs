@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_bullet"]
+
+[sub_resource type="StandardMaterial3D" id="BulletMaterial"]
+albedo_color = Color(1, 0.75, 0.12, 1)
+emission_enabled = true
+emission = Color(1, 0.35, 0.03, 1)
+
+[sub_resource type="SphereMesh" id="BulletMesh"]
+material = SubResource("BulletMaterial")
+radius = 0.1
+height = 0.2
+
+[node name="Bullet" type="Node3D"]
+script = ExtResource("1_bullet")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BulletMesh")
