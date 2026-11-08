@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://clj7p4sr032xx"]
+
+[ext_resource type="Script" path="res://scripts/third_person_game.gd" id="1_glv2v"]
+
+[node name="Main" type="Node3D" unique_id=1290392849]
+script = ExtResource("1_glv2v")
