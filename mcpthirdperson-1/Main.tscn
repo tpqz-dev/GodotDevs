@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://clj7p4sr032xx"]
+
+[ext_resource type="Script" uid="uid://tk6di8uys8qu" path="res://scripts/third_person_game.gd" id="1_glv2v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnd5y"]
+albedo_color = Color(0.44813776, 0.82773554, 0.7268486, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gwwqv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gwwqv"]
+
+[node name="Main" type="Node3D" unique_id=1290392849]
+script = ExtResource("1_glv2v")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1903773344]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 405.21204, 386.53998, 0)
+light_energy = 0.26
+shadow_enabled = true
+
+[node name="Arena" type="CSGBox3D" parent="." unique_id=911413900]
+transform = Transform3D(1.0051581, 0, 0, 0, 1.0051581, 0, 0, 0, 1.0051581, -0.54992676, 2.0629272, -0.58154297)
+use_collision = true
+size = Vector3(1000, 0.217, 1000)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Arena" unique_id=1951484178]
+transform = Transform3D(89.71297, 0, 0, 0, 5.0313787, 0, 0, 0, 82.19288, -455.02545, 43.957367, -476.67117)
+radius = 0.2944336
+height = 19.275635
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Arena" unique_id=1694226827]
+transform = Transform3D(89.71296, 0, 0, 0, 5.0313787, 0, 0, 0, 82.19287, 456.50574, 43.14884, 460.65204)
+radius = 0.2944336
+height = 19.275635
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Arena" unique_id=408429882]
+transform = Transform3D(89.71296, 0, 0, 0, 5.0313787, 0, 0, 0, 82.19287, 460.9301, 35.938675, -472.67346)
+radius = 0.2944336
+height = 19.275635
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Arena" unique_id=351621764]
+transform = Transform3D(89.71297, 0, 0, 0, 5.0313787, 0, 0, 0, 82.19288, -463.12384, 43.914017, 470.52066)
+radius = 0.2944336
+height = 19.275635
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Arena" unique_id=2137593746]
+transform = Transform3D(443.5674, 0, 0, 0, 62.38278, 0, 0, 0, 13.59126, -13.448726, 30.534815, -500.2164)
+size = Vector3(2.205841, 1, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Arena" unique_id=1126361039]
+transform = Transform3D(443.5674, 0, 0, 0, 62.382774, 0, 0, 0, 13.591259, -13.448725, 30.534813, 492.79794)
+size = Vector3(2.205841, 1, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Arena" unique_id=1530461298]
+transform = Transform3D(-1.938895e-05, 0, 13.591257, 0, 62.38276, 0, -443.5674, 0, -5.940927e-07, -504.05832, 30.534805, -4.271333)
+size = Vector3(2.205841, 1, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Arena" unique_id=1753059095]
+transform = Transform3D(-1.938895e-05, 0, 13.591254, 0, 62.382748, 0, -443.5674, 0, -5.940925e-07, 482.0676, 30.5348, -4.271332)
+size = Vector3(2.205841, 1, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2045412241]
+transform = Transform3D(1.6, 0, 0, 0, 1.2, 0, 0, 0, 1.6, 1.5415162, 2.7861857, 6.2736807)
+material_override = SubResource("StandardMaterial3D_dnd5y")
+mesh = SubResource("BoxMesh_gwwqv")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="MeshInstance3D" unique_id=429013896]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/RigidBody3D" unique_id=910308333]
+shape = SubResource("BoxShape3D_gwwqv")
